@@ -1,0 +1,6 @@
+
+{
+  "name": "Aditya's Modern Portfolio",
+  "description": "A professional, minimal, and futuristic single-page personal portfolio website with smooth animations, vertical skills timeline, and an AI-powered chat companion.",
+  "requestFramePermissions": ["camera", "microphone"]
+}
