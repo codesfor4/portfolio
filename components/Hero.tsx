@@ -89,7 +89,7 @@ const Hero: React.FC<HeroProps> = ({ onOpenContactForm }) => {
             <div className="relative w-72 h-72 md:w-[450px] md:h-[450px] rounded-full overflow-hidden border border-white/10 p-2 glass-card">
               <div className="w-full h-full rounded-full overflow-hidden">
                 <img
-                  src="/assests/1751608378838.png"
+                  src="components/assests/1751608378838.png"
                   alt="Aditya" 
                   className="w-full h-full object-cover grayscale brightness-90 hover:grayscale-0 transition-all duration-1000"
                 />

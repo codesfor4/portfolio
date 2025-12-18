@@ -30,7 +30,7 @@ const ProjectsPreview: React.FC = () => {
         <div className="relative">
           <TiltCard className="rounded-2xl overflow-hidden">
             <img
-              src="/assests/projects sample.avif"
+              src="components/assests/projects sample.avif"
               alt="Projects Preview"
               className="w-full h-auto object-cover rounded-2xl"
             />
