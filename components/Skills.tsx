@@ -68,6 +68,28 @@ const SkillCard: React.FC<{ skill: SkillItem; index: number }> = ({ skill, index
 };
 
 const Skills: React.FC = () => {
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const [scrollProgress, setScrollProgress] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!sectionRef.current) return;
+      const rect = sectionRef.current.getBoundingClientRect();
+      const sectionHeight = rect.height;
+      const viewportHeight = window.innerHeight;
+
+      // Calculate progress: 0 when section top enters viewport, 100 when section bottom exits
+      const progress = Math.max(0, Math.min(100,
+        ((viewportHeight - rect.top) / (sectionHeight + viewportHeight)) * 100
+      ));
+      setScrollProgress(progress);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    handleScroll(); // Initial call
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   const skills: SkillItem[] = [
     { name: 'QA (Quality Assurance)', side: 'left' },
     { name: 'n8n Automation', side: 'right' },
@@ -81,7 +103,7 @@ const Skills: React.FC = () => {
   ];
 
   return (
-    <div className="max-w-4xl mx-auto px-6 relative">
+    <div ref={sectionRef} className="max-w-4xl mx-auto px-6 relative">
       <div className="text-center mb-20">
         <h2 className="text-5xl md:text-7xl font-black mb-6 tracking-tighter">Tech Stack</h2>
         <p className="text-slate-500 text-xl font-light">
@@ -89,10 +111,23 @@ const Skills: React.FC = () => {
         </p>
       </div>
 
-      {/* Vertical Line */}
-      <div className="absolute left-1/2 transform -translate-x-1/2 top-48 bottom-0 w-px bg-gradient-to-b from-blue-600 via-blue-400 to-transparent hidden md:block"></div>
+      {/* Vertical Line with Scroll-Driven Glow */}
+      <div className="absolute left-1/2 transform -translate-x-1/2 top-48 bottom-0 w-px bg-gradient-to-b from-blue-600/30 via-blue-400/20 to-transparent hidden md:block">
+        {/* Scroll-driven glow that travels down/up with scroll */}
+        <div
+          className="absolute left-1/2 -translate-x-1/2 w-3 h-20 bg-gradient-to-b from-cyan-400 via-blue-500 to-transparent rounded-full blur-sm transition-all duration-150"
+          style={{ top: `${Math.min(scrollProgress, 85)}%` }}
+        />
+        {/* Bright center glow */}
+        <div
+          className="absolute left-1/2 -translate-x-1/2 w-1 h-12 bg-gradient-to-b from-white via-cyan-300 to-transparent rounded-full transition-all duration-150"
+          style={{ top: `${Math.min(scrollProgress, 85)}%` }}
+        />
+        {/* Base line glow */}
+        <div className="absolute inset-0 w-px bg-blue-500/30 blur-sm"></div>
+      </div>
 
-      <div className="space-y-8 md:space-y-12 relative">
+      <div className="space-y-4 md:space-y-6 relative">
         {skills.map((skill, index) => (
           <SkillCard key={index} skill={skill} index={index} />
         ))}

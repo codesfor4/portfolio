@@ -13,10 +13,12 @@ interface JourneyCardProps {
 
 const JourneyCard: React.FC<JourneyCardProps> = ({ title, subtitle, details, period, icon }) => (
   <div className="w-[280px] md:w-[340px] flex-shrink-0 glass-card rounded-[2rem] p-6 transition-all duration-700 hover:-translate-y-6 hover:border-blue-500/60 group relative snap-center">
-    {/* Connection Point to the Line - Precision Aligned closer to the dot (12px instead of 30px) */}
-    <div className="absolute -top-[12px] left-1/2 -translate-x-1/2 flex flex-col items-center pointer-events-none">
-      <div className="w-px h-[12px] bg-gradient-to-b from-blue-600/40 to-blue-600/80"></div>
-      <div className="w-6 h-6 rounded-full bg-blue-600 border-4 border-black shadow-[0_0_25px_rgba(37,99,235,1)] group-hover:scale-150 transition-all duration-500 z-10"></div>
+    {/* Connection Point - Dot sits on the timeline, line flows down to card */}
+    <div className="absolute -top-[32px] left-1/2 -translate-x-1/2 flex flex-col items-center pointer-events-none">
+      {/* The dot on the timeline */}
+      <div className="w-5 h-5 rounded-full bg-blue-600 border-4 border-black shadow-[0_0_20px_rgba(37,99,235,0.8)] group-hover:scale-125 group-hover:shadow-[0_0_30px_rgba(37,99,235,1)] transition-all duration-500 z-10"></div>
+      {/* Vertical line from dot to card */}
+      <div className="w-px h-[24px] bg-gradient-to-b from-blue-600 to-blue-600/40"></div>
     </div>
     
     <div className="w-16 h-16 rounded-2xl bg-blue-500/10 flex items-center justify-center text-blue-400 mb-8 group-hover:scale-110 group-hover:bg-blue-500/20 transition-all duration-500">
@@ -85,14 +87,23 @@ const Journey: React.FC = () => {
 
   return (
     <div className="w-full relative py-2 overflow-hidden">
-      {/* Centered Title Section */}
-      <div className="max-w-7xl mx-auto px-6 text-center mb-8">
+      {/* Centered Title Section with Flow Line */}
+      <div className="max-w-7xl mx-auto px-6 text-center mb-0 relative">
         <h2 className="text-6xl md:text-8xl font-black tracking-tighter bg-gradient-to-b from-white to-slate-500 bg-clip-text text-transparent">
           Journey So Far
         </h2>
+        {/* Vertical Flow Line from title to timeline */}
+        <div className="flex justify-center mt-4">
+          <div className="w-px h-24 bg-gradient-to-b from-blue-600/80 via-blue-600/50 to-blue-600/30 relative">
+            {/* Animated pulse traveling down */}
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1 h-8 bg-gradient-to-b from-blue-400 to-transparent rounded-full animate-pulse"></div>
+            {/* Glow effect */}
+            <div className="absolute inset-0 w-px bg-blue-500/50 blur-sm"></div>
+          </div>
+        </div>
       </div>
 
-      <div className="relative group pt-12">
+      <div className="relative group pt-0">
         {/* Navigation Buttons */}
         <button 
           onClick={() => scroll('left')}
@@ -109,13 +120,13 @@ const Journey: React.FC = () => {
           <ChevronRight size={24} />
         </button>
 
-        {/* The Timeline Axis - Adjusted to top-12 to align with dots */}
-        <div className="absolute top-12 left-0 right-0 h-px bg-gradient-to-r from-transparent via-blue-600/30 to-transparent z-0"></div>
+        {/* The Timeline Axis - Connected to flow line */}
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-blue-600/50 to-transparent z-0"></div>
 
         {/* Carousel Container */}
-        <div 
+        <div
           ref={scrollRef}
-          className="flex gap-8 overflow-x-auto pb-24 pt-12 snap-x snap-mandatory no-scrollbar scroll-smooth"
+          className="flex gap-8 overflow-x-auto pb-24 pt-8 snap-x snap-mandatory no-scrollbar scroll-smooth"
           style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
         >
           {/* Edge Spacers to center initial cards */}

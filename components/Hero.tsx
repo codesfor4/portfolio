@@ -95,9 +95,16 @@ const Hero: React.FC<HeroProps> = ({ onOpenContactForm }) => {
                 />
               </div>
             </div>
-            {/* HUD Elements */}
-            <div className="absolute top-10 -right-4 glass-card px-4 py-2 rounded-lg border-blue-500/50 hidden md:block">
-              <span className="text-blue-400 text-[10px] font-bold tracking-tighter uppercase">Status: Online</span>
+            {/* Chat Message Bubble */}
+            <div className="absolute top-10 -right-4 hidden md:block">
+              <div className="relative glass-card px-4 py-3 rounded-2xl rounded-bl-sm border border-blue-500/30 shadow-lg shadow-blue-500/10">
+                {/* Bubble tail pointing to photo */}
+                <div className="absolute -left-2 bottom-2 w-0 h-0 border-t-8 border-t-transparent border-r-8 border-r-slate-900/80 border-b-8 border-b-transparent"></div>
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse shadow-lg shadow-green-500/50"></div>
+                  <span className="text-white text-xs font-medium">Online</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>

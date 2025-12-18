@@ -80,6 +80,14 @@
         .cosmic-gradient {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         }
+        @keyframes slow-pan {
+            0% { background-position: 0% 0%; }
+            50% { background-position: 100% 100%; }
+            100% { background-position: 0% 0%; }
+        }
+        .animate-slow-pan {
+            animation: slow-pan 120s ease-in-out infinite;
+        }
     </style>
 <script type="importmap">
 {

@@ -36,7 +36,6 @@ const Navbar: React.FC<NavbarProps> = ({ activeSection }) => {
   const navItems = [
     { name: 'Home', href: '#home' },
     { name: 'Journey', href: '#journey' },
-    { name: 'Video', href: '#video' },
     { name: 'Skills', href: '#skills' },
     { name: 'Projects', href: '#projects' },
     { name: 'About', href: '#about' },
