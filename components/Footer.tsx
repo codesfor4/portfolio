@@ -13,7 +13,7 @@ const Footer: React.FC = () => {
               Designing the future through data analytics and intelligent automation.
             </p>
             <a
-              href="/assests/Product_Aditya_Resume.pdf"
+              href="/assets/Product_Aditya_Resume.pdf"
               download="Aditya_Resume.pdf"
               className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold hover:shadow-lg hover:shadow-blue-500/25 transition-all hover:scale-105"
             >

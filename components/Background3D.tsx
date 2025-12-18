@@ -7,7 +7,7 @@ const Background3D: React.FC = () => {
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat animate-slow-pan"
         style={{
-          backgroundImage: 'url(/assests/cosmic.avif)',
+          backgroundImage: 'url(/assets/cosmic.avif)',
           backgroundSize: '120% 120%',
         }}
       />
