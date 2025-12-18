@@ -140,9 +140,6 @@ const Journey: React.FC = () => {
         </div>
       </div>
       
-      {/* Refined Edge Gradients */}
-      <div className="absolute right-0 top-0 bottom-0 w-64 bg-gradient-to-l from-black via-black/60 to-transparent pointer-events-none z-20"></div>
-      <div className="absolute left-0 top-0 bottom-0 w-64 bg-gradient-to-r from-black via-black/60 to-transparent pointer-events-none z-20"></div>
     </div>
   );
 };

@@ -42,7 +42,7 @@ const VideoSection: React.FC = () => {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
         {/* Left Side - Video Container */}
         <div className="relative group flex justify-center lg:justify-start">
-          <div className="aspect-video w-full max-w-lg rounded-2xl overflow-hidden glass-card border-2 border-slate-700/50 hover:border-blue-500/50 transition-all duration-500 relative">
+          <div className="aspect-video w-full max-w-2xl rounded-2xl overflow-hidden glass-card border-2 border-slate-700/50 hover:border-blue-500/50 transition-all duration-500 relative">
             {/* YouTube Video Embed - Auto plays when visible */}
             <iframe
               src={videoUrl}
