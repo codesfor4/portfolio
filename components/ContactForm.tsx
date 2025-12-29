@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { X, Send, User, Building, Phone, Mail, MessageSquare } from 'lucide-react';
 
@@ -32,6 +31,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ isOpen, onClose }) => {
 
   const [errors, setErrors] = useState<FormErrors>({});
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const validateForm = (): boolean => {
     const newErrors: FormErrors = {};
@@ -72,49 +72,103 @@ const ContactForm: React.FC<ContactFormProps> = ({ isOpen, onClose }) => {
     }
   };
 
-  const [isLoading, setIsLoading] = useState(false);
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (validateForm()) {
       setIsLoading(true);
-      try {
-        const webhookData = {
-          name: formData.name,
-          company: formData.company || 'Not provided',
-          phone: formData.phone,
-          email: formData.email,
-          message: formData.message || 'No message',
-          timestamp: new Date().toISOString()
-        };
+      
+      const webhookData = {
+        name: formData.name,
+        company: formData.company || 'Not provided',
+        phone: formData.phone,
+        email: formData.email,
+        message: formData.message || 'No message',
+        timestamp: new Date().toISOString(),
+        source: 'portfolio_contact_form'
+      };
 
-        // Send data to webhook (use webhook-test for testing, webhook for production)
-        const response = await fetch('https://n8n.srv1170036.hstgr.cloud/webhook-test/connect', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(webhookData),
-        });
+      console.log('🚀 Sending contact form data:', webhookData);
 
-        if (response.ok) {
-          // Data sent successfully - webhook responded with success
-          console.log('Message sent successfully to webhook!');
-          setIsSubmitted(true);
-          setFormData({ name: '', company: '', phone: '', email: '', message: '' });
-          setTimeout(() => {
-            setIsSubmitted(false);
-            onClose();
-          }, 3000);
-        } else {
-          throw new Error(`Webhook responded with status: ${response.status}`);
+      // Webhook URL for contact form
+      const webhookUrls = [
+        'https://n8n.srv1170036.hstgr.cloud/webhook/getintouch'
+      ];
+
+      let success = false;
+
+      // Try each webhook URL
+      for (let i = 0; i < webhookUrls.length && !success; i++) {
+        const url = webhookUrls[i];
+        console.log(`📡 Attempting webhook ${i + 1}: ${url}`);
+        
+        try {
+          // Use FormData to avoid CORS preflight issues
+          const formDataPayload = new FormData();
+          Object.entries(webhookData).forEach(([key, value]) => {
+            formDataPayload.append(key, String(value));
+          });
+
+          const response = await fetch(url, {
+            method: 'POST',
+            body: formDataPayload,
+          });
+
+          console.log(`📊 Response: ${response.status} ${response.statusText}`);
+
+          if (response.ok) {
+            console.log('✅ Webhook success!');
+            success = true;
+            break;
+          } else {
+            console.log(`❌ Webhook ${i + 1} failed with status ${response.status}`);
+          }
+        } catch (error) {
+          console.log(`❌ Webhook ${i + 1} error:`, error);
         }
-      } catch (error) {
-        console.error('Error sending message:', error);
-        alert('Failed to send message. Please check your connection and try again.');
-      } finally {
-        setIsLoading(false);
       }
+
+      if (success) {
+        // Show success message
+        console.log('🎉 Form submitted successfully via webhook!');
+        setIsSubmitted(true);
+        setFormData({ name: '', company: '', phone: '', email: '', message: '' });
+        setTimeout(() => {
+          setIsSubmitted(false);
+          onClose();
+        }, 3000);
+      } else {
+        // All webhooks failed - use email fallback
+        console.log('📧 All webhooks failed, using email fallback');
+        
+        const mailtoSubject = encodeURIComponent('Portfolio Contact Form Submission');
+        const mailtoBody = encodeURIComponent(
+          `Hi Aditya,\n\n` +
+          `Someone filled out your portfolio contact form:\n\n` +
+          `Name: ${formData.name}\n` +
+          `Company: ${formData.company || 'Not provided'}\n` +
+          `Phone: ${formData.phone}\n` +
+          `Email: ${formData.email}\n` +
+          `Message: ${formData.message || 'No message provided'}\n\n` +
+          `Sent: ${new Date().toLocaleString()}\n` +
+          `Source: Portfolio Website Contact Form`
+        );
+        
+        const mailtoUrl = `mailto:thorataditya859@gmail.com?subject=${mailtoSubject}&body=${mailtoBody}`;
+        
+        // Open email client
+        window.open(mailtoUrl, '_blank');
+        
+        // Show success message
+        console.log('📧 Email client opened successfully!');
+        setIsSubmitted(true);
+        setFormData({ name: '', company: '', phone: '', email: '', message: '' });
+        setTimeout(() => {
+          setIsSubmitted(false);
+          onClose();
+        }, 3000);
+      }
+      
+      setIsLoading(false);
     }
   };
 
