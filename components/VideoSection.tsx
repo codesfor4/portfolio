@@ -4,6 +4,8 @@ import { Play } from 'lucide-react';
 const VideoSection: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
+  const [hasClicked, setHasClicked] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -12,7 +14,7 @@ const VideoSection: React.FC = () => {
           setIsVisible(entry.isIntersecting);
         });
       },
-      { threshold: 0.5 } // Video plays when 50% of section is visible
+      { threshold: 0.5 }
     );
 
     if (sectionRef.current) {
@@ -26,10 +28,16 @@ const VideoSection: React.FC = () => {
     };
   }, []);
 
-  // Build YouTube URL with autoplay based on visibility
-  const videoUrl = isVisible
+  // Video plays on hover or after click
+  const shouldPlay = isVisible && (isHovered || hasClicked);
+
+  const videoUrl = shouldPlay
     ? "https://www.youtube.com/embed/4cQWJViybAQ?si=-nKi2PXhfLYfsDLF&autoplay=1&mute=1&controls=1&showinfo=1&rel=0&modestbranding=1&enablejsapi=1"
     : "https://www.youtube.com/embed/4cQWJViybAQ?si=-nKi2PXhfLYfsDLF&autoplay=0&mute=1&controls=1&showinfo=1&rel=0&modestbranding=1&enablejsapi=1";
+
+  const handleClick = () => {
+    setHasClicked(true);
+  };
 
   return (
     <div className="max-w-7xl mx-auto px-6" ref={sectionRef}>
@@ -42,8 +50,13 @@ const VideoSection: React.FC = () => {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
         {/* Left Side - Video Container */}
         <div className="relative group flex justify-center lg:justify-start">
-          <div className="aspect-video w-full max-w-2xl rounded-2xl overflow-hidden glass-card border-2 border-slate-700/50 hover:border-blue-500/50 transition-all duration-500 relative">
-            {/* YouTube Video Embed - Auto plays when visible */}
+          <div
+            className="aspect-video w-full max-w-2xl rounded-2xl overflow-hidden glass-card border-2 border-slate-700/50 hover:border-red-500/50 transition-all duration-500 relative cursor-pointer"
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+            onClick={handleClick}
+          >
+            {/* YouTube Video Embed */}
             <iframe
               src={videoUrl}
               title="YouTube video player"
@@ -52,6 +65,16 @@ const VideoSection: React.FC = () => {
               allowFullScreen
               className="w-full h-full rounded-2xl"
             ></iframe>
+
+            {/* Hover Play Overlay - shows when not playing */}
+            {!shouldPlay && (
+              <div className="absolute inset-0 bg-black/50 flex items-center justify-center transition-all duration-300 group-hover:bg-black/30">
+                <div className="w-20 h-20 rounded-full bg-red-600 flex items-center justify-center transform transition-all duration-300 group-hover:scale-110 group-hover:bg-red-500 shadow-lg shadow-red-500/50">
+                  <Play className="w-8 h-8 text-white ml-1" fill="currentColor" />
+                </div>
+                <span className="absolute bottom-6 text-white/80 text-sm font-medium">Hover or click to play</span>
+              </div>
+            )}
           </div>
         </div>
 
