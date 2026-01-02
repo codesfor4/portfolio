@@ -11,6 +11,7 @@ import Background3D from './components/Background3D';
 import ProjectsPage from './components/ProjectsPage';
 import ContactForm from './components/ContactForm';
 import VideoSection from './components/VideoSection';
+import FunSection from './components/FunSection';
 
 const App: React.FC = () => {
   const [activeSection, setActiveSection] = useState('home');
@@ -37,7 +38,7 @@ const App: React.FC = () => {
     if (currentPage !== 'home') return;
 
     const handleScroll = () => {
-      const sections = ['home', 'journey', 'skills', 'projects', 'about'];
+      const sections = ['home', 'journey', 'skills', 'fun', 'projects', 'about'];
       const scrollPosition = window.scrollY + 100;
 
       for (const section of sections) {
@@ -88,6 +89,10 @@ const App: React.FC = () => {
 
         <section id="skills" className="pt-8 pb-32">
           <Skills />
+        </section>
+
+        <section id="fun" className="py-32 bg-gradient-to-b from-transparent via-orange-900/5 to-transparent">
+          <FunSection />
         </section>
 
         <section id="projects" className="py-32 bg-gradient-to-b from-transparent via-indigo-900/10 to-transparent">
