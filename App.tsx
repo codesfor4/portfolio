@@ -4,7 +4,7 @@ import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Journey from './components/Journey';
 import Skills from './components/Skills';
-import ProjectsPreview from './components/ProjectsPreview';
+import CaseStudies from './components/CaseStudies';
 import About from './components/About';
 import Footer from './components/Footer';
 import Background3D from './components/Background3D';
@@ -91,7 +91,7 @@ const App: React.FC = () => {
         </section>
 
         <section id="projects" className="py-32 bg-gradient-to-b from-transparent via-indigo-900/10 to-transparent">
-          <ProjectsPreview />
+          <CaseStudies />
         </section>
 
         <section id="about" className="py-32 bg-slate-950/40 backdrop-blur-sm">
