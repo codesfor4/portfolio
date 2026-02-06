@@ -43,39 +43,39 @@ const TypewriterText: React.FC<{ words: string[] }> = ({ words }) => {
 
 const Hero: React.FC<HeroProps> = ({ onOpenContactForm }) => {
   return (
-    <div className="relative min-h-screen flex items-center pt-24 px-6 overflow-hidden">
+    <div className="relative min-h-screen flex items-center pt-20 sm:pt-24 px-4 sm:px-6 overflow-hidden">
       {/* Central Cosmos Core Glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-blue-600/5 rounded-full blur-[160px] pointer-events-none"></div>
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] sm:w-[800px] h-[500px] sm:h-[800px] bg-blue-600/5 rounded-full blur-[100px] sm:blur-[160px] pointer-events-none"></div>
 
-      <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-16 items-center relative z-10">
+      <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center relative z-10">
         {/* Left Content */}
-        <div className="space-y-8 text-center lg:text-left order-2 lg:order-1">
-          <h1 className="text-6xl md:text-8xl font-extrabold tracking-tighter leading-none text-white">
+        <div className="space-y-4 sm:space-y-6 lg:space-y-8 text-center lg:text-left order-2 lg:order-1">
+          <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold tracking-tighter leading-none text-white">
             Hi, I'm <br />
             <span className="bg-gradient-to-r from-blue-400 via-indigo-500 to-blue-600 bg-clip-text text-transparent">Aditya</span>
           </h1>
 
-          <div className="text-3xl md:text-5xl font-light text-slate-400 tracking-tight">
-            Delivering <br className="md:hidden" />
+          <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-light text-slate-400 tracking-tight">
+            Delivering <br className="sm:hidden" />
             <TypewriterText words={["Intelligence.", "Automation.", "Efficiency."]} />
           </div>
 
-          <p className="text-xl text-slate-400 max-w-xl leading-relaxed font-light">
-            I craft data-driven solutions and intelligent automated systems 
+          <p className="text-base sm:text-lg lg:text-xl text-slate-400 max-w-xl mx-auto lg:mx-0 leading-relaxed font-light px-2 sm:px-0">
+            I craft data-driven solutions and intelligent automated systems
             that empower the next generation of digital platforms.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-6 pt-8 justify-center lg:justify-start">
-            <a 
-              href="#journey" 
-              className="group relative px-10 py-4 rounded-full bg-blue-600 text-white font-bold transition-all overflow-hidden"
+          <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 pt-4 sm:pt-8 justify-center lg:justify-start">
+            <a
+              href="#journey"
+              className="group relative px-8 sm:px-10 py-3 sm:py-4 rounded-full bg-blue-600 text-white font-bold transition-all overflow-hidden text-sm sm:text-base"
             >
               <div className="absolute inset-0 w-full h-full bg-blue-400 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500"></div>
               <span className="relative z-10">See Journey</span>
             </a>
             <button
               onClick={onOpenContactForm}
-              className="px-10 py-4 rounded-full border border-white/10 text-white font-medium hover:bg-white/5 transition-all"
+              className="px-8 sm:px-10 py-3 sm:py-4 rounded-full border border-white/10 text-white font-medium hover:bg-white/5 transition-all text-sm sm:text-base"
             >
               Get in Touch
             </button>
@@ -85,19 +85,19 @@ const Hero: React.FC<HeroProps> = ({ onOpenContactForm }) => {
         {/* Right Photo */}
         <div className="flex justify-center lg:justify-end order-1 lg:order-2">
           <div className="relative animate-float">
-            <div className="absolute -inset-4 bg-blue-600/20 rounded-full blur-[100px]"></div>
-            <div className="relative w-72 h-72 md:w-[450px] md:h-[450px] rounded-full overflow-hidden border border-white/10 p-2 glass-card">
+            <div className="absolute -inset-4 bg-blue-600/20 rounded-full blur-[80px] sm:blur-[100px]"></div>
+            <div className="relative w-60 h-60 sm:w-72 sm:h-72 md:w-96 md:h-96 lg:w-[450px] lg:h-[450px] rounded-full overflow-hidden border border-white/10 p-2 glass-card">
               <div className="w-full h-full rounded-full overflow-hidden">
                 <img
                   src="/assets/1751608378838.png"
-                  alt="Aditya" 
+                  alt="Aditya"
                   className="w-full h-full object-cover grayscale brightness-90 hover:grayscale-0 transition-all duration-1000"
                 />
               </div>
             </div>
             {/* Chat Message Bubble */}
-            <div className="absolute top-10 -right-4 hidden md:block">
-              <div className="relative glass-card px-4 py-3 rounded-2xl rounded-bl-sm border border-blue-500/30 shadow-lg shadow-blue-500/10">
+            <div className="absolute top-6 sm:top-10 -right-2 sm:-right-4 hidden sm:block">
+              <div className="relative glass-card px-3 sm:px-4 py-2 sm:py-3 rounded-2xl rounded-bl-sm border border-blue-500/30 shadow-lg shadow-blue-500/10">
                 {/* Bubble tail pointing to photo */}
                 <div className="absolute -left-2 bottom-2 w-0 h-0 border-t-8 border-t-transparent border-r-8 border-r-slate-900/80 border-b-8 border-b-transparent"></div>
                 <div className="flex items-center gap-2">

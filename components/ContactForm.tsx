@@ -181,18 +181,18 @@ const ContactForm: React.FC<ContactFormProps> = ({ isOpen, onClose }) => {
       />
 
       {/* Modal */}
-      <div className="relative w-full max-w-md glass-card rounded-2xl p-6 animate-fade-in max-h-[90vh] overflow-y-auto">
+      <div className="relative w-full max-w-md glass-card rounded-xl sm:rounded-2xl p-4 sm:p-6 animate-fade-in max-h-[90vh] overflow-y-auto">
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-3 right-3 text-slate-400 hover:text-white transition-colors"
+          className="absolute top-2 sm:top-3 right-2 sm:right-3 text-slate-400 hover:text-white transition-colors"
         >
-          <X size={20} />
+          <X size={18} className="sm:w-5 sm:h-5" />
         </button>
 
         {/* Header */}
-        <div className="mb-4">
-          <h2 className="text-xl font-bold text-white mb-1">Get in Touch</h2>
+        <div className="mb-3 sm:mb-4">
+          <h2 className="text-lg sm:text-xl font-bold text-white mb-1">Get in Touch</h2>
           <p className="text-slate-400 text-xs">Fill out the form and I'll get back to you soon.</p>
         </div>
 
@@ -205,9 +205,9 @@ const ContactForm: React.FC<ContactFormProps> = ({ isOpen, onClose }) => {
             <p className="text-slate-400 text-sm">Thank you! I'll respond shortly.</p>
           </div>
         ) : (
-          <form onSubmit={handleSubmit} className="space-y-3">
+          <form onSubmit={handleSubmit} className="space-y-2.5 sm:space-y-3">
             {/* Name & Company Row */}
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3">
               <div>
                 <label htmlFor="contact-name" className="block text-xs font-medium text-slate-300 mb-1">
                   Name <span className="text-red-400">*</span>
@@ -251,7 +251,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ isOpen, onClose }) => {
             </div>
 
             {/* Phone & Email Row */}
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3">
               <div>
                 <label htmlFor="contact-phone" className="block text-xs font-medium text-slate-300 mb-1">
                   Phone

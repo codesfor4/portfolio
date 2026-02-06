@@ -211,41 +211,41 @@ const ScrollProjects: React.FC = () => {
                             <div className={`absolute inset-0 bg-gradient-to-br ${project.gradient}`} />
 
                             {/* Faded Background Number */}
-                            <span className="absolute -right-12 -bottom-20 text-[25rem] font-bold text-white/5 select-none pointer-events-none font-serif leading-none">
+                            <span className="absolute -right-6 sm:-right-12 -bottom-10 sm:-bottom-20 text-[10rem] sm:text-[15rem] md:text-[20rem] lg:text-[25rem] font-bold text-white/5 select-none pointer-events-none font-serif leading-none">
                                 {project.id}
                             </span>
 
                             {/* Content Container */}
-                            <div className="absolute inset-0 p-12 md:p-16 flex flex-col justify-between">
+                            <div className="absolute inset-0 p-6 sm:p-8 md:p-12 lg:p-16 flex flex-col justify-between">
                                 {/* Top: Category & Tags */}
                                 <div className="flex justify-between items-start">
-                                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card bg-white/5 border border-white/10 text-white/80 text-sm font-medium tracking-wide uppercase">
+                                    <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full glass-card bg-white/5 border border-white/10 text-white/80 text-xs sm:text-sm font-medium tracking-wide uppercase">
                                         {project.category}
                                     </div>
-                                    <div className="flex gap-1.5">
+                                    <div className="flex gap-1 sm:gap-1.5">
                                         {Array.from({ length: 3 }).map((_, j) => (
-                                            <div key={j} className={`w-1.5 h-1.5 rounded-full ${j === 0 ? 'bg-white' : 'bg-white/20'}`} />
+                                            <div key={j} className={`w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full ${j === 0 ? 'bg-white' : 'bg-white/20'}`} />
                                         ))}
                                     </div>
                                 </div>
 
                                 {/* Icon floating */}
-                                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white/10 transform scale-[3]">
+                                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white/10 transform scale-[2] sm:scale-[2.5] md:scale-[3]">
                                     {project.icon}
                                 </div>
 
                                 {/* Main Content */}
-                                <div className="space-y-8 z-10 max-w-2xl">
-                                    <h2 className="text-5xl md:text-7xl font-bold text-white font-serif leading-tight">
+                                <div className="space-y-4 sm:space-y-6 lg:space-y-8 z-10 max-w-2xl">
+                                    <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold text-white font-serif leading-tight">
                                         {project.title}
                                     </h2>
-                                    <p className="text-xl text-slate-300 leading-relaxed font-light">
+                                    <p className="text-sm sm:text-base md:text-lg lg:text-xl text-slate-300 leading-relaxed font-light">
                                         {project.description}
                                     </p>
 
-                                    <button className="group mt-4 inline-flex items-center gap-3 text-white text-lg font-medium border-b border-white/0 hover:border-white transition-all pb-1">
+                                    <button className="group mt-2 sm:mt-4 inline-flex items-center gap-2 sm:gap-3 text-white text-sm sm:text-base lg:text-lg font-medium border-b border-white/0 hover:border-white transition-all pb-1">
                                         View Case Study
-                                        <ArrowRight className="group-hover:translate-x-1 transition-transform" />
+                                        <ArrowRight size={16} className="sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" />
                                     </button>
                                 </div>
                             </div>
