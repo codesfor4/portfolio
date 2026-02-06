@@ -7,33 +7,33 @@ const FunSection: React.FC = () => {
       icon: <Video className="w-8 h-8" />,
       title: "Video Creation",
       description: "Creating engaging tech tutorials and coding walkthroughs that make complex concepts simple and fun.",
-      color: "from-red-500 to-pink-500"
+      color: "from-blue-500 to-cyan-500"
     },
     {
       icon: <Camera className="w-8 h-8" />,
       title: "Photography",
       description: "Capturing moments and creating visual stories that inspire. From tech setups to creative portraits.",
-      color: "from-blue-500 to-cyan-500"
+      color: "from-indigo-500 to-blue-500"
     },
     {
       icon: <Edit className="w-8 h-8" />,
       title: "Content Editing",
       description: "Crafting polished content with smooth transitions, engaging effects, and storytelling that connects.",
-      color: "from-purple-500 to-indigo-500"
+      color: "from-sky-500 to-indigo-500"
     },
     {
       icon: <Mic className="w-8 h-8" />,
       title: "Podcasting",
       description: "Sharing insights about tech, automation, and the future of work through engaging conversations.",
-      color: "from-green-500 to-emerald-500"
+      color: "from-cyan-500 to-blue-500"
     }
   ];
 
   return (
     <div className="max-w-7xl mx-auto px-6">
       <div className="text-center mb-16">
-        <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-orange-400 via-pink-500 to-purple-500 bg-clip-text text-transparent">
-          🎨 What I Do For Fun
+        <h2 className="text-5xl md:text-6xl font-black mb-4 bg-gradient-to-r from-blue-400 via-indigo-500 to-cyan-400 bg-clip-text text-transparent">
+          What I Do For Fun
         </h2>
         <p className="text-slate-400 text-lg max-w-2xl mx-auto">
           When I'm not automating workflows or analyzing data, I'm creating content that brings tech to life.
@@ -76,11 +76,11 @@ const FunSection: React.FC = () => {
       <div className="relative rounded-3xl overflow-hidden glass-card group">
         <div className="aspect-video bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center relative overflow-hidden">
           {/* Placeholder for content creation image */}
-          <div className="absolute inset-0 bg-gradient-to-br from-orange-600/20 via-pink-600/20 to-purple-600/20" />
+          <div className="absolute inset-0 bg-gradient-to-br from-blue-600/20 via-indigo-600/20 to-cyan-600/20" />
           
           {/* Content overlay */}
           <div className="relative z-10 text-center p-8">
-            <div className="w-20 h-20 bg-gradient-to-br from-orange-500 to-pink-500 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+            <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
               <Camera className="w-10 h-10 text-white" />
             </div>
             <h3 className="text-3xl font-bold text-white mb-4">Content Creation Studio</h3>
@@ -104,8 +104,8 @@ const FunSection: React.FC = () => {
           </div>
 
           {/* Animated elements */}
-          <div className="absolute top-1/4 left-1/4 w-32 h-32 bg-orange-500/10 rounded-full blur-xl animate-pulse" />
-          <div className="absolute bottom-1/4 right-1/4 w-24 h-24 bg-pink-500/10 rounded-full blur-xl animate-pulse delay-1000" />
+          <div className="absolute top-1/4 left-1/4 w-32 h-32 bg-blue-500/10 rounded-full blur-xl animate-pulse" />
+          <div className="absolute bottom-1/4 right-1/4 w-24 h-24 bg-cyan-500/10 rounded-full blur-xl animate-pulse delay-1000" />
         </div>
 
         {/* Bottom info bar */}
@@ -133,7 +133,7 @@ const FunSection: React.FC = () => {
             href="https://youtube.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-red-600 hover:bg-red-500 text-white font-semibold transition-all duration-300 hover:scale-105"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-blue-600 hover:bg-blue-500 text-white font-semibold transition-all duration-300 hover:scale-105"
           >
             <Video className="w-5 h-5" />
             YouTube
@@ -142,7 +142,7 @@ const FunSection: React.FC = () => {
             href="https://instagram.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-400 hover:to-purple-400 text-white font-semibold transition-all duration-300 hover:scale-105"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-indigo-500 to-cyan-500 hover:from-indigo-400 hover:to-cyan-400 text-white font-semibold transition-all duration-300 hover:scale-105"
           >
             <Camera className="w-5 h-5" />
             Instagram

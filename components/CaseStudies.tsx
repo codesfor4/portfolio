@@ -20,36 +20,36 @@ const CaseStudies: React.FC = () => {
         {/* Right Side - Info Content */}
         <div className="space-y-6">
           <h2 className="text-5xl md:text-6xl font-black leading-tight">
-            <span className="bg-gradient-to-r from-blue-400 via-purple-500 to-cyan-400 bg-clip-text text-transparent">
-              Case Studies
+            <span className="bg-gradient-to-r from-blue-400 via-indigo-500 to-cyan-400 bg-clip-text text-transparent">
+              Product Impact
             </span>
           </h2>
 
           <p className="text-lg text-slate-400 leading-relaxed">
-            Real-world solutions that drive measurable results. From automation to analytics,
-            here's how I solve complex business problems with data-driven approaches.
+            Product case studies showcasing user-centered problem solving and measurable business impact.
+            Each project demonstrates strategic thinking, data-driven decisions, and cross-functional collaboration.
           </p>
 
           <ul className="space-y-3">
             <li className="flex items-center gap-3 text-slate-300">
               <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
-              Lead Generation Automation - 80% faster prospecting
+              B2B Lead Generation Platform - 80% time reduction, 4.7/5 satisfaction
             </li>
             <li className="flex items-center gap-3 text-slate-300">
-              <span className="w-2 h-2 bg-purple-500 rounded-full"></span>
-              Predictive Analytics Dashboard - 92% accuracy
+              <span className="w-2 h-2 bg-indigo-500 rounded-full"></span>
+              Retail Analytics Platform - 92% forecast accuracy, $200K ARR
             </li>
             <li className="flex items-center gap-3 text-slate-300">
               <span className="w-2 h-2 bg-cyan-500 rounded-full"></span>
-              Workflow Automation Suite - 40+ hrs saved weekly
+              Business Automation Platform - 40+ hrs saved, 70% activation rate
             </li>
           </ul>
 
           <a
             href="/projects"
-            className="group inline-flex items-center gap-3 px-8 py-4 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 text-white font-bold transition-all hover:from-blue-500 hover:to-purple-500 shadow-lg hover:shadow-blue-500/25"
+            className="group inline-flex items-center gap-3 px-8 py-4 rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold transition-all hover:from-blue-500 hover:to-indigo-500 shadow-lg hover:shadow-blue-500/25"
           >
-            Show More
+            View Case Studies
             <ArrowRight size={20} className="transition-transform group-hover:translate-x-1" />
           </a>
         </div>

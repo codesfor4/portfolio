@@ -37,7 +37,6 @@ const Navbar: React.FC<NavbarProps> = ({ activeSection }) => {
     { name: 'Home', href: '#home' },
     { name: 'Journey', href: '#journey' },
     { name: 'Skills', href: '#skills' },
-    { name: 'Fun', href: '#fun' },
     { name: 'Projects', href: '#projects' },
     { name: 'About', href: '#about' },
   ];

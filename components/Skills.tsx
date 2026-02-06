@@ -1,136 +1,122 @@
+import React, { useRef } from 'react';
+import { Code, Database, Workflow, ChevronLeft, ChevronRight, Sparkles } from 'lucide-react';
 
-import React, { useEffect, useRef, useState } from 'react';
-
-interface SkillItem {
-  name: string;
-  side: 'left' | 'right';
+interface SkillCardProps {
+  title: string;
+  skills: string[];
+  icon: React.ReactElement;
+  gradient: string;
 }
 
-const SkillCard: React.FC<{ skill: SkillItem; index: number }> = ({ skill, index }) => {
-  const [isVisible, setIsVisible] = useState(false);
-  const cardRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        // Toggle visibility based on intersection status to allow disappearing when scrolling away
-        setIsVisible(entry.isIntersecting);
-      },
-      { 
-        threshold: 0.1,
-        rootMargin: '-50px 0px -50px 0px' // Slightly inset so it disappears just before hitting edges
-      }
-    );
-
-    if (cardRef.current) {
-      observer.observe(cardRef.current);
-    }
-
-    return () => {
-      if (cardRef.current) {
-        observer.unobserve(cardRef.current);
-      }
-    };
-  }, []);
-
-  const isLeft = skill.side === 'left';
-
-  return (
-    <div 
-      ref={cardRef}
-      className={`flex flex-col md:flex-row items-center justify-center relative transition-all duration-700 ease-in-out ${
-        isVisible 
-          ? 'opacity-100 translate-x-0 translate-y-0 scale-100 blur-0' 
-          : `opacity-0 ${isLeft ? '-translate-x-12' : 'translate-x-12'} translate-y-12 scale-95 blur-sm`
-      } ${
-        isLeft ? 'md:flex-row-reverse' : ''
-      }`}
-    >
-      <div className={`w-full md:w-1/2 px-4 ${
-        isLeft ? 'md:text-left ' : 'md:text-right'
-      }`}>
-        <div className="inline-block p-4 px-4 rounded-3xl glass-card hover:border-blue-500/50 hover:bg-blue-600/5 transition-all duration-500 cursor-default group w-full md:w-auto overflow-hidden relative">
-          {/* Subtle hover glow effect */}
-          <div className="absolute inset-0 bg-gradient-to-r from-blue-600/0 via-blue-600/5 to-blue-600/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
-          
-          <span className="text-xl font-bold tracking-tight text-slate-100 group-hover:text-blue-400 group-hover:neon-text-blue transition-all relative z-10">
-            {skill.name}
-          </span>
-        </div>
-      </div>
-
-      {/* Timeline Dot */}
-      <div className={`hidden md:flex absolute left-1/2 transform -translate-x-1/2 w-3 h-2 rounded-full bg-blue-600 shadow-[0_0_15px_rgba(37,99,235,0.8)] z-10 transition-all duration-500 ${isVisible ? 'scale-100 opacity-100' : 'scale-0 opacity-0'}`}></div>
-
-      <div className="hidden md:block md:w-1/2 px-2"></div>
+const SkillCard: React.FC<SkillCardProps> = ({ title, skills, icon, gradient }) => (
+  <div className="w-[320px] md:w-[420px] flex-shrink-0 glass-card rounded-[2rem] p-6 transition-all duration-700 hover:-translate-y-6 hover:border-purple-500/60 group relative snap-center">
+    {/* Connection Point - Dot sits on the timeline */}
+    <div className="absolute -top-[32px] left-1/2 -translate-x-1/2 flex flex-col items-center pointer-events-none">
+      <div className="w-5 h-5 rounded-full bg-purple-600 border-4 border-black shadow-[0_0_20px_rgba(168,85,247,0.8)] group-hover:scale-125 group-hover:shadow-[0_0_30px_rgba(168,85,247,1)] transition-all duration-500 z-10"></div>
+      <div className="w-px h-[24px] bg-gradient-to-b from-purple-600 to-purple-600/40"></div>
     </div>
-  );
-};
+
+    <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${gradient} flex items-center justify-center text-white mb-8 group-hover:scale-110 transition-all duration-500`}>
+      {React.cloneElement(icon as React.ReactElement<any>, { size: 32 })}
+    </div>
+
+    <div className="space-y-4">
+      <h3 className="text-2xl font-black text-white leading-tight group-hover:text-purple-100 transition-colors">{title}</h3>
+      <div className="pt-6 border-t border-white/10 space-y-2">
+        {skills.map((skill, i) => (
+          <div key={i} className="flex items-center gap-2">
+            <div className="w-1.5 h-1.5 rounded-full bg-purple-400"></div>
+            <p className="text-slate-300 text-sm">{skill}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+);
 
 const Skills: React.FC = () => {
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const [scrollProgress, setScrollProgress] = useState(0);
+  const scrollRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      if (!sectionRef.current) return;
-      const rect = sectionRef.current.getBoundingClientRect();
-      const sectionHeight = rect.height;
-      const viewportHeight = window.innerHeight;
+  const scroll = (direction: 'left' | 'right') => {
+    if (scrollRef.current) {
+      const { scrollLeft, clientWidth } = scrollRef.current;
+      const scrollAmount = clientWidth * 0.75;
+      const scrollTo = direction === 'left' ? scrollLeft - scrollAmount : scrollLeft + scrollAmount;
+      scrollRef.current.scrollTo({ left: scrollTo, behavior: 'smooth' });
+    }
+  };
 
-      // Calculate progress: 0 when section top enters viewport, 100 when section bottom exits
-      const progress = Math.max(0, Math.min(100,
-        ((viewportHeight - rect.top) / (sectionHeight + viewportHeight)) * 100
-      ));
-      setScrollProgress(progress);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    handleScroll(); // Initial call
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  const skills: SkillItem[] = [
-    { name: 'QA (Quality Assurance)', side: 'left' },
-    { name: 'n8n Automation', side: 'right' },
-    { name: 'Python Engineering', side: 'left' },
-    { name: 'A/B Testing', side: 'right' },
-    { name: 'System Testing', side: 'left' },
-    { name: 'Workflow Automation', side: 'right' },
-    { name: 'SQL Querying', side: 'left' },
-    { name: 'MySQL Database', side: 'right' },
-    { name: 'Power BI Visualization', side: 'left' },
+  const skillCategories = [
+    {
+      title: "Automation & Workflows",
+      skills: ["n8n Automation", "Workflow Design", "Process Optimization", "API Integration"],
+      icon: <Workflow />,
+      gradient: "from-purple-600/20 to-purple-600/10"
+    },
+    {
+      title: "Data & Analytics",
+      skills: ["SQL Querying", "MySQL Database", "Power BI Visualization", "Data Analysis"],
+      icon: <Database />,
+      gradient: "from-blue-600/20 to-blue-600/10"
+    },
+    {
+      title: "Development",
+      skills: ["Python Engineering", "QA Testing", "A/B Testing", "System Testing"],
+      icon: <Code />,
+      gradient: "from-cyan-600/20 to-cyan-600/10"
+    }
   ];
 
   return (
-    <div ref={sectionRef} className="max-w-4xl mx-auto px-6 relative">
-      <div className="text-center mb-20">
-        <h2 className="text-5xl md:text-7xl font-black mb-6 tracking-tighter">Tech Stack</h2>
-        <p className="text-slate-500 text-xl font-light">
-          A collection of tools that drive my <span className="text-blue-500">automation ecosystem</span>.
-        </p>
+    <div className="w-full relative py-2 overflow-hidden">
+      {/* Title Section */}
+      <div className="max-w-7xl mx-auto px-6 text-center mb-0 relative">
+        <h2 className="text-5xl md:text-6xl font-black tracking-tighter bg-gradient-to-b from-white to-slate-500 bg-clip-text text-transparent">
+          Skills
+        </h2>
+        {/* Flow Line */}
+        <div className="flex justify-center mt-4">
+          <div className="w-px h-24 bg-gradient-to-b from-purple-600/80 via-purple-600/50 to-purple-600/30 relative">
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1 h-8 bg-gradient-to-b from-purple-400 to-transparent rounded-full animate-pulse"></div>
+            <div className="absolute inset-0 w-px bg-purple-500/50 blur-sm"></div>
+          </div>
+        </div>
       </div>
 
-      {/* Vertical Line with Scroll-Driven Glow */}
-      <div className="absolute left-1/2 transform -translate-x-1/2 top-48 bottom-0 w-px bg-gradient-to-b from-blue-600/30 via-blue-400/20 to-transparent hidden md:block">
-        {/* Scroll-driven glow that travels down/up with scroll */}
-        <div
-          className="absolute left-1/2 -translate-x-1/2 w-3 h-20 bg-gradient-to-b from-cyan-400 via-blue-500 to-transparent rounded-full blur-sm transition-all duration-150"
-          style={{ top: `${Math.min(scrollProgress, 85)}%` }}
-        />
-        {/* Bright center glow */}
-        <div
-          className="absolute left-1/2 -translate-x-1/2 w-1 h-12 bg-gradient-to-b from-white via-cyan-300 to-transparent rounded-full transition-all duration-150"
-          style={{ top: `${Math.min(scrollProgress, 85)}%` }}
-        />
-        {/* Base line glow */}
-        <div className="absolute inset-0 w-px bg-blue-500/30 blur-sm"></div>
-      </div>
+      <div className="relative group pt-0">
+        {/* Navigation Buttons */}
+        <button
+          onClick={() => scroll('left')}
+          className="absolute left-6 top-1/2 -translate-y-1/2 z-40 w-14 h-14 rounded-full glass-card border-white/10 flex items-center justify-center hover:bg-purple-600 hover:text-white transition-all shadow-2xl active:scale-90 md:flex hidden"
+          aria-label="Scroll Left"
+        >
+          <ChevronLeft size={24} />
+        </button>
+        <button
+          onClick={() => scroll('right')}
+          className="absolute right-6 top-1/2 -translate-y-1/2 z-40 w-14 h-14 rounded-full glass-card border-white/10 flex items-center justify-center hover:bg-purple-600 hover:text-white transition-all shadow-2xl active:scale-90 md:flex hidden"
+          aria-label="Scroll Right"
+        >
+          <ChevronRight size={24} />
+        </button>
 
-      <div className="space-y-4 md:space-y-6 relative">
-        {skills.map((skill, index) => (
-          <SkillCard key={index} skill={skill} index={index} />
-        ))}
+        {/* Timeline Axis */}
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-purple-600/50 to-transparent z-0"></div>
+
+        {/* Carousel Container */}
+        <div
+          ref={scrollRef}
+          className="flex gap-8 overflow-x-auto pb-24 pt-8 snap-x snap-mandatory no-scrollbar scroll-smooth"
+          style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+        >
+          <div className="flex-shrink-0 w-[5vw] md:w-[10vw]"></div>
+
+          {skillCategories.map((category, index) => (
+            <SkillCard key={index} {...category} />
+          ))}
+
+          <div className="flex-shrink-0 w-[5vw] md:w-[10vw]"></div>
+        </div>
       </div>
     </div>
   );

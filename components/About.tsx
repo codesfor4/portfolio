@@ -7,29 +7,32 @@ const About: React.FC = () => {
     <div className="max-w-7xl mx-auto px-6">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
         <div>
-          <h2 className="text-4xl md:text-5xl font-bold mb-8 leading-tight">
-            Passion for Building <span className="text-blue-500">Efficient Solutions</span>
+          <h2 className="text-5xl md:text-6xl font-black mb-8 leading-tight">
+            Building <span className="text-purple-500">Products That Matter</span>
           </h2>
           <div className="space-y-6 text-lg text-slate-300 leading-relaxed">
             <p>
-              I am a results-driven professional with a deep passion for data, AI, and automation. 
-              My journey began with a curiosity for how complex systems can be simplified through 
-              smart logic and data-driven insights.
+              I'm a product manager with a technical foundation in automation and analytics.
+              My journey began with building systems, which taught me the importance of understanding
+              both user needs and technical constraints.
             </p>
             <p>
-              Today, I focus on bridging the gap between raw information and business value. 
-              Whether it's architecting a robust SQL database or engineering an automated 
-              workflow that saves hours of manual labor, my goal is always scalability and efficiency.
+              Today, I focus on creating data-driven products that solve real user problems and drive
+              measurable business impact. My technical background helps me collaborate effectively with
+              engineering teams, make pragmatic trade-offs, and build products that are both visionary
+              and technically feasible.
             </p>
             <p>
-              When I'm not digging into datasets, I'm exploring the latest in generative AI 
-              and finding new ways to integrate machine learning into everyday problem-solving.
+              I believe the best products come from deep user understanding, rigorous experimentation,
+              and cross-functional collaboration. Whether it's conducting user research, analyzing
+              behavioral data, or prioritizing features based on impact, I'm driven by creating value
+              for users and businesses alike.
             </p>
           </div>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-          <div className="p-8 rounded-3xl bg-slate-900 border border-slate-800 hover:border-blue-500/30 transition-all">
+          <div className="p-8 rounded-3xl glass-card hover:border-blue-500/30 transition-all">
             <div className="w-12 h-12 rounded-2xl bg-blue-500/10 flex items-center justify-center text-blue-400 mb-6">
               <Zap size={24} />
             </div>
@@ -37,7 +40,7 @@ const About: React.FC = () => {
             <p className="text-slate-400 text-sm">Rapidly prototyping solutions for complex business hurdles.</p>
           </div>
 
-          <div className="p-8 rounded-3xl bg-slate-900 border border-slate-800 hover:border-indigo-500/30 transition-all">
+          <div className="p-8 rounded-3xl glass-card hover:border-indigo-500/30 transition-all">
             <div className="w-12 h-12 rounded-2xl bg-indigo-500/10 flex items-center justify-center text-indigo-400 mb-6">
               <Target size={24} />
             </div>
@@ -45,7 +48,7 @@ const About: React.FC = () => {
             <p className="text-slate-400 text-sm">Focusing on high-impact KPIs and measurable growth results.</p>
           </div>
 
-          <div className="p-8 rounded-3xl bg-slate-900 border border-slate-800 hover:border-blue-500/30 transition-all sm:col-span-2">
+          <div className="p-8 rounded-3xl glass-card hover:border-blue-500/30 transition-all sm:col-span-2">
             <div className="flex items-start gap-6">
               <div className="w-12 h-12 rounded-2xl bg-cyan-500/10 flex items-center justify-center text-cyan-400 flex-shrink-0">
                 <TrendingUp size={24} />

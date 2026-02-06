@@ -12,7 +12,7 @@ interface JourneyCardProps {
 }
 
 const JourneyCard: React.FC<JourneyCardProps> = ({ title, subtitle, details, period, icon }) => (
-  <div className="w-[280px] md:w-[340px] flex-shrink-0 glass-card rounded-[2rem] p-6 transition-all duration-700 hover:-translate-y-6 hover:border-blue-500/60 group relative snap-center">
+  <div className="w-[320px] md:w-[420px] flex-shrink-0 glass-card rounded-[2rem] p-6 transition-all duration-700 hover:-translate-y-6 hover:border-blue-500/60 group relative snap-center">
     {/* Connection Point - Dot sits on the timeline, line flows down to card */}
     <div className="absolute -top-[32px] left-1/2 -translate-x-1/2 flex flex-col items-center pointer-events-none">
       {/* The dot on the timeline */}
@@ -63,23 +63,23 @@ const Journey: React.FC = () => {
       icon: <GraduationCap />
     },
     {
-      title: "Data Analysis Intern",
+      title: "Product Analyst Intern",
       subtitle: "Kanishka Software",
-      details: "Transformed raw datasets into actionable insights. Developed predictive models and optimized complex SQL queries for real-time reporting.",
+      details: "Analyzed user behavior data to inform product decisions. Built predictive models and dashboards to track product metrics and KPIs. Worked cross-functionally with engineering and design teams.",
       period: "June 2025 – Oct 2025",
       icon: <Briefcase />
     },
     {
-      title: "AI Automation Lead",
-      subtitle: "Personal Projects",
-      details: "Pioneering autonomous workflows using LLMs and n8n. Building systems that bridge the gap between human intent and automated execution.",
+      title: "Product Strategy & Development",
+      subtitle: "Independent Projects",
+      details: "Leading end-to-end product development for automation and analytics solutions. Conducting user research, defining product vision, prioritizing features based on impact, and measuring success through key metrics.",
       period: "Jan 2024 - Present",
       icon: <Briefcase />
     },
     {
-      title: "Workflow Consultant",
-      subtitle: "Independent",
-      details: "Partnering with businesses to audit and overhaul their digital infrastructure, implementing intelligent automations that scale.",
+      title: "Technical Product Owner",
+      subtitle: "Workflow Consulting",
+      details: "Partnering with businesses to identify pain points, define product requirements, and deliver workflow automation solutions. Collaborated with stakeholders to align technical capabilities with business objectives.",
       period: "Aug 2024 - Present",
       icon: <Briefcase />
     }
@@ -89,7 +89,7 @@ const Journey: React.FC = () => {
     <div className="w-full relative py-2 overflow-hidden">
       {/* Centered Title Section with Flow Line */}
       <div className="max-w-7xl mx-auto px-6 text-center mb-0 relative">
-        <h2 className="text-6xl md:text-8xl font-black tracking-tighter bg-gradient-to-b from-white to-slate-500 bg-clip-text text-transparent">
+        <h2 className="text-5xl md:text-6xl font-black tracking-tighter bg-gradient-to-b from-white to-slate-500 bg-clip-text text-transparent">
           Journey So Far
         </h2>
         {/* Vertical Flow Line from title to timeline */}

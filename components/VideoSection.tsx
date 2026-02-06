@@ -4,7 +4,6 @@ import { Play } from 'lucide-react';
 const VideoSection: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
-  const [isHovered, setIsHovered] = useState(false);
   const [hasClicked, setHasClicked] = useState(false);
 
   useEffect(() => {
@@ -28,8 +27,8 @@ const VideoSection: React.FC = () => {
     };
   }, []);
 
-  // Video plays on hover or after click
-  const shouldPlay = isVisible && (isHovered || hasClicked);
+  // Video plays only after explicit click
+  const shouldPlay = isVisible && hasClicked;
 
   const videoUrl = shouldPlay
     ? "https://www.youtube.com/embed/4cQWJViybAQ?si=-nKi2PXhfLYfsDLF&autoplay=1&mute=1&controls=1&showinfo=1&rel=0&modestbranding=1&enablejsapi=1"
@@ -42,8 +41,8 @@ const VideoSection: React.FC = () => {
   return (
     <div className="max-w-7xl mx-auto px-6" ref={sectionRef}>
       <div className="text-center mb-16">
-        <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-red-500 via-pink-500 to-purple-500 bg-clip-text text-transparent">
-          🎬 Watch Me Code
+        <h2 className="text-5xl md:text-6xl font-black mb-4 bg-gradient-to-r from-blue-400 via-indigo-500 to-cyan-400 bg-clip-text text-transparent">
+          Watch Me Code
         </h2>
       </div>
 
@@ -51,9 +50,7 @@ const VideoSection: React.FC = () => {
         {/* Left Side - Video Container */}
         <div className="relative group flex justify-center lg:justify-start">
           <div
-            className="aspect-video w-full max-w-2xl rounded-2xl overflow-hidden glass-card border-2 border-slate-700/50 hover:border-red-500/50 transition-all duration-500 relative cursor-pointer"
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
+            className="aspect-video w-full max-w-2xl rounded-2xl overflow-hidden glass-card border-2 border-slate-700/50 hover:border-blue-500/50 transition-all duration-500 relative cursor-pointer"
             onClick={handleClick}
           >
             {/* YouTube Video Embed */}
@@ -69,10 +66,10 @@ const VideoSection: React.FC = () => {
             {/* Hover Play Overlay - shows when not playing */}
             {!shouldPlay && (
               <div className="absolute inset-0 bg-black/50 flex items-center justify-center transition-all duration-300 group-hover:bg-black/30">
-                <div className="w-20 h-20 rounded-full bg-red-600 flex items-center justify-center transform transition-all duration-300 group-hover:scale-110 group-hover:bg-red-500 shadow-lg shadow-red-500/50">
+                <div className="w-20 h-20 rounded-full bg-blue-600 flex items-center justify-center transform transition-all duration-300 group-hover:scale-110 group-hover:bg-blue-500 shadow-lg shadow-blue-500/50">
                   <Play className="w-8 h-8 text-white ml-1" fill="currentColor" />
                 </div>
-                <span className="absolute bottom-6 text-white/80 text-sm font-medium">Hover or click to play</span>
+                <span className="absolute bottom-6 text-white/80 text-sm font-medium">Click to play</span>
               </div>
             )}
           </div>
@@ -86,15 +83,15 @@ const VideoSection: React.FC = () => {
           
           <div className="space-y-4">
             <div className="flex items-center gap-3 justify-center lg:justify-start">
-              <div className="w-2 h-2 bg-red-500 rounded-full"></div>
+              <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
               <span className="text-slate-400 text-lg">Get Tech news First </span>
             </div>
             <div className="flex items-center gap-3 justify-center lg:justify-start">
-              <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+              <div className="w-2 h-2 bg-indigo-500 rounded-full"></div>
               <span className="text-slate-400 text-lg">Real-time Interaction</span>
             </div>
             <div className="flex items-center gap-3 justify-center lg:justify-start">
-              <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
+              <div className="w-2 h-2 bg-cyan-500 rounded-full"></div>
               <span className="text-slate-400 text-lg">No Fluff, Pure Value</span>
             </div>
           </div>
@@ -104,7 +101,7 @@ const VideoSection: React.FC = () => {
               href="https://youtu.be/4cQWJViybAQ?si=-nKi2PXhfLYfsDLF"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-red-600 hover:bg-red-500 text-white font-bold transition-all duration-300 shadow-lg hover:shadow-red-500/25"
+              className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-blue-600 hover:bg-blue-500 text-white font-bold transition-all duration-300 shadow-lg hover:shadow-blue-500/25"
             >
               <Play className="w-5 h-5" fill="currentColor" />
               Watch on YouTube

@@ -43,11 +43,9 @@ const ContactForm: React.FC<ContactFormProps> = ({ isOpen, onClose }) => {
       newErrors.name = 'Name must be at least 2 characters';
     }
 
-    // Phone validation
+    // Phone validation (optional)
     const phoneRegex = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/;
-    if (!formData.phone.trim()) {
-      newErrors.phone = 'Phone number is required';
-    } else if (!phoneRegex.test(formData.phone.replace(/\s/g, ''))) {
+    if (formData.phone.trim() && !phoneRegex.test(formData.phone.replace(/\s/g, ''))) {
       newErrors.phone = 'Please enter a valid phone number';
     }
 
@@ -211,7 +209,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ isOpen, onClose }) => {
             {/* Name & Company Row */}
             <div className="grid grid-cols-2 gap-3">
               <div>
-                <label className="block text-xs font-medium text-slate-300 mb-1">
+                <label htmlFor="contact-name" className="block text-xs font-medium text-slate-300 mb-1">
                   Name <span className="text-red-400">*</span>
                 </label>
                 <div className="relative">
@@ -219,19 +217,22 @@ const ContactForm: React.FC<ContactFormProps> = ({ isOpen, onClose }) => {
                   <input
                     type="text"
                     name="name"
+                    id="contact-name"
                     value={formData.name}
                     onChange={handleChange}
                     placeholder="Your name"
+                    aria-invalid={!!errors.name}
+                    aria-describedby={errors.name ? "contact-name-error" : undefined}
                     className={`w-full pl-9 pr-3 py-2 text-sm bg-slate-900/50 border rounded-lg text-white placeholder-slate-500 focus:outline-none focus:ring-2 transition-all ${
                       errors.name ? 'border-red-500 focus:ring-red-500/50' : 'border-slate-700 focus:ring-blue-500/50 focus:border-blue-500'
                     }`}
                   />
                 </div>
-                {errors.name && <p className="text-red-400 text-[10px] mt-0.5">{errors.name}</p>}
+                {errors.name && <p id="contact-name-error" className="text-red-400 text-[10px] mt-0.5">{errors.name}</p>}
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-slate-300 mb-1">
+                <label htmlFor="contact-company" className="block text-xs font-medium text-slate-300 mb-1">
                   Company
                 </label>
                 <div className="relative">
@@ -239,6 +240,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ isOpen, onClose }) => {
                   <input
                     type="text"
                     name="company"
+                    id="contact-company"
                     value={formData.company}
                     onChange={handleChange}
                     placeholder="Optional"
@@ -251,27 +253,30 @@ const ContactForm: React.FC<ContactFormProps> = ({ isOpen, onClose }) => {
             {/* Phone & Email Row */}
             <div className="grid grid-cols-2 gap-3">
               <div>
-                <label className="block text-xs font-medium text-slate-300 mb-1">
-                  Phone <span className="text-red-400">*</span>
+                <label htmlFor="contact-phone" className="block text-xs font-medium text-slate-300 mb-1">
+                  Phone
                 </label>
                 <div className="relative">
                   <Phone size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500" />
                   <input
                     type="tel"
                     name="phone"
+                    id="contact-phone"
                     value={formData.phone}
                     onChange={handleChange}
                     placeholder="+91 XXXXXXXXXX"
+                    aria-invalid={!!errors.phone}
+                    aria-describedby={errors.phone ? "contact-phone-error" : undefined}
                     className={`w-full pl-9 pr-3 py-2 text-sm bg-slate-900/50 border rounded-lg text-white placeholder-slate-500 focus:outline-none focus:ring-2 transition-all ${
                       errors.phone ? 'border-red-500 focus:ring-red-500/50' : 'border-slate-700 focus:ring-blue-500/50 focus:border-blue-500'
                     }`}
                   />
                 </div>
-                {errors.phone && <p className="text-red-400 text-[10px] mt-0.5">{errors.phone}</p>}
+                {errors.phone && <p id="contact-phone-error" className="text-red-400 text-[10px] mt-0.5">{errors.phone}</p>}
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-slate-300 mb-1">
+                <label htmlFor="contact-email" className="block text-xs font-medium text-slate-300 mb-1">
                   Email <span className="text-red-400">*</span>
                 </label>
                 <div className="relative">
@@ -279,27 +284,31 @@ const ContactForm: React.FC<ContactFormProps> = ({ isOpen, onClose }) => {
                   <input
                     type="email"
                     name="email"
+                    id="contact-email"
                     value={formData.email}
                     onChange={handleChange}
                     placeholder="your@email.com"
+                    aria-invalid={!!errors.email}
+                    aria-describedby={errors.email ? "contact-email-error" : undefined}
                     className={`w-full pl-9 pr-3 py-2 text-sm bg-slate-900/50 border rounded-lg text-white placeholder-slate-500 focus:outline-none focus:ring-2 transition-all ${
                       errors.email ? 'border-red-500 focus:ring-red-500/50' : 'border-slate-700 focus:ring-blue-500/50 focus:border-blue-500'
                     }`}
                   />
                 </div>
-                {errors.email && <p className="text-red-400 text-[10px] mt-0.5">{errors.email}</p>}
+                {errors.email && <p id="contact-email-error" className="text-red-400 text-[10px] mt-0.5">{errors.email}</p>}
               </div>
             </div>
 
             {/* Message */}
             <div>
-              <label className="block text-xs font-medium text-slate-300 mb-1">
+              <label htmlFor="contact-message" className="block text-xs font-medium text-slate-300 mb-1">
                 Message
               </label>
               <div className="relative">
                 <MessageSquare size={14} className="absolute left-3 top-3 text-slate-500" />
                 <textarea
                   name="message"
+                  id="contact-message"
                   value={formData.message}
                   onChange={handleChange}
                   placeholder="Your message (optional)"
